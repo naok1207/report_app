@@ -1,0 +1,9 @@
+<%= form_for(@user.profile) do |f| %>
+    <%= f.label :location %>
+    <%= f.text_field :location %>
+
+    <%= f.label :about %>
+    <%= f.text_field :about %>
+
+    <%= f.submit "変更を反映" %>
+<% end %>

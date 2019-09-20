@@ -1,0 +1,13 @@
+<h1>Users#show</h1>
+<p><%= @user.name %></p>
+<p><%= @user.profile.location %></p>
+<p><%= @user.profile.about %></p>
+<ul>
+<% @user.posts.each do |post| %>
+    <li><%= post.content %></li>
+<% end %>
+</ul>
+<%= link_to "新規投稿を作成", new_user_post_path(@user) %>
+<%= link_to "プロフィール編集", @user.profile %>
+<%= link_to "ユーザ一覧", users_path %>
+<%= link_to "投稿一覧", user_posts_path(@user) %>

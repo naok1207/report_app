@@ -1,0 +1,6 @@
+<table>
+    <th>name</th><th>email</th>
+    <%= render @users %>
+</table>
+<%= link_to "マイページ", @user %>
+<%= link_to "ログアウト", logout_path, method: :delete %>
