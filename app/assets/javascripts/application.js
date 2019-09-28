@@ -13,3 +13,29 @@
 //= require rails-ujs
 //= require activestorage
 //= require_tree .
+//= require jquery3
+//= require jquery
+//= require popper
+//= require bootstrap-sprockets
+
+$(function() {
+    $(document).on('click', 'input[type=submit]', function() {
+      if ($('input[type=text]').val() == '') {
+        return false;
+      } else
+      if ($('textarea').val() == '') {
+        return false;
+      }
+    })
+})
+
+$(function() {
+    $('.js-modal-open').on('click',function(){
+        $('.js-modal').fadeIn();
+        return false;
+    });
+    $('.js-modal-close').on('click',function(){
+        $('.js-modal').fadeOut();
+        return false;
+    });
+})

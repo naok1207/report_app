@@ -2,7 +2,7 @@
 <p>Find me in app/views/posts/new.html.erb</p>
 <%= form_for(@post, :url => {:controller => :posts, :action => :create}) do |f| %>
     <%= f.label :content %>
-    <%= f.text_field :content %>
+    <%= f.text_area :content %>
 
     <%= f.submit "作成" %>
 <% end %>

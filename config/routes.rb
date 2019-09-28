@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
 
+  get   '/users/:id/followed', to: 'relationships#followed', as: 'followed'
+  get   '/users/:id/follower', to: 'relationships#follower', as: 'follower'
+
   resources :users do
-    resources :posts, only: [:index, :new, :create]
+    resources :posts, only: [:show, :new, :create]
   end
+  resources :relationships, only: [:create, :destroy]
 end

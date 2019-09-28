@@ -1,1 +1,14 @@
-<li><%= post.content %></li>
+<div class="post-box">
+    <div class="post-left">
+            <% if post.user.profile.image? %>
+            <%= image_tag post.user.profile.image.url, class: "user-icon" %>
+        <% else %>
+            <div class="user-icon"></div>
+        <% end %>
+    </div>
+    <div class="post-right">
+        <h5 class="user-name"><%= link_to post.user.name, post.user %></h5>
+        <p class="create-time"><%= time_ago_in_words(post.created_at) %></p>
+        <p class="post-content"><%= post.content %></p>
+    </div>
+</div>

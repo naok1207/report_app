@@ -1,0 +1,25 @@
+<div class="post-modal js-modal">
+    <div class="post-modal-bg js-modal-close"></div>
+    <div class="post-modal-content">
+        <div class="modal-top"><a class="js-modal-close" href="">×</a></div>
+        <% if @user == current_user %>
+        <div class="modal-bottom">
+            <div class="modal-left">
+                <% if @user.profile.image? %>
+                    <%= image_tag @user.profile.image.url, class: "user-icon" %>
+                <% else %>
+                    <%= image_tag("/images/icon/no-image.png") %>
+                <% end %>
+            </%=>
+            </div>
+            <div class="modal-right">
+                <%= form_for @post, url: {action: "create", controller: "posts", user_id: current_user.id}, class: "post-modal" do |f| %>
+                    <%= f.text_area :content, size: "20x10", class: "form-control" %>
+        
+                    <%= f.submit "作成", class: "modal-submit" %>
+                <% end %>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>

@@ -4,10 +4,14 @@ class UsersController < ApplicationController
   def index
     @user = User.find(current_user.id)
     @users = User.all
+    @post = Post.new
   end
 
   def show
     @user = User.find(params[:id])
+    @post = Post.new
+    @posts = Post.where(user_id: @user.id).order(created_at: "DESC")
+    @followers = Relationship.where(follow_id: @user.id)
   end
 
   def new
@@ -26,6 +30,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def update
@@ -48,7 +53,6 @@ class UsersController < ApplicationController
 
     def logged_in_user
       unless logged_in?
-        flash[:danber] = "Please log in"
         redirect_to login_url
       end
     end

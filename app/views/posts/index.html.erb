@@ -1,5 +1,19 @@
 <h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
-<ul>
-    <%= render @posts %>
-</ul>
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <ul>
+            <% if @user == current_user %>
+            <li><%= link_to "home", user_post_path(id: @user.id) %></li>
+        <% end %>
+            </ul>
+        </div>
+        <div class="col-8">
+            <ul class="list-unstyled">
+                <%= render @posts %>
+            </ul>
+        </div>
+    </div>
+</div>
+<%= render 'posts/modal' %>
+

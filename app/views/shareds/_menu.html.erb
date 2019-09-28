@@ -1,0 +1,7 @@
+<div class="user-menu">
+    <ul>
+        <li><%= link_to "マイページ", current_user %></li>
+        <li><%= link_to "home", user_post_path(id: current_user.id, user_id: current_user.id) %></li>
+        <a class="js-modal-open" href="">ツイート</a>
+    </ul>
+</div>

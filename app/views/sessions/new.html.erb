@@ -1,14 +1,20 @@
-<div>
-    <%= form_for(:session, url: login_path) do |f| %>
-
+    <div class="form-signin">    
+        <%= form_for(:session, url: login_path) do |f| %>
+        <h1 class="h3 mb-3 font-weight-normal">
+            <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">
+                    please sing in
+                </font>
+            </font>
+        </h1>
+        
         <%= f.label :email %>
-        <%= f.email_field :email %>
+        <%= f.email_field :email, class: "form-control" %>
 
-        <%= f.label :password %>
-        <%= f.password_field :password %>
+        <%= f.label :password, class: "mt-3" %>
+        <%= f.password_field :password, class: "form-control" %>
 
-        <%= f.submit "Log in" %>
-    <% end %>
-
-    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
-</div>
+        <%= f.submit "Log in", class: "btn btn-lg btn-primary btn-block mt-3" %>
+        <% end %>
+        <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    </div>

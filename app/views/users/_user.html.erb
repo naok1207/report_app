@@ -1,3 +1,11 @@
 <tr>
-    <td><%= user.name %></td><td><%= user.email %></td>
+    <td><p><%= link_to user.name, user %></p></td>
+    <td>
+        <p class="text-center"><%= user.relationships.count %></p>
+    </td>
+    <td>
+        <p class="text-center"><%= Relationship.where(follow_id: user.id).count %></p>
+    </td>
 </tr>
+
+

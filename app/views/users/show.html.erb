@@ -1,13 +1,41 @@
-<h1>Users#show</h1>
-<p><%= @user.name %></p>
-<p><%= @user.profile.location %></p>
-<p><%= @user.profile.about %></p>
-<ul>
-<% @user.posts.each do |post| %>
-    <li><%= post.content %></li>
-<% end %>
-</ul>
-<%= link_to "新規投稿を作成", new_user_post_path(@user) %>
-<%= link_to "プロフィール編集", @user.profile %>
-<%= link_to "ユーザ一覧", users_path %>
-<%= link_to "投稿一覧", user_posts_path(@user) %>
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <div class="main-wrapper">
+                <%= render "shareds/menu" %>
+            </div>
+        </div>
+        <div class="col-8 wrapper">
+            <div class="user-content">
+                <div class="profile-box">
+                    <div class="user-bg"></div>
+                    <div class="user-content">
+                        <div class="first-line">
+                            <% if @user.profile.image? %>
+                                <%= image_tag @user.profile.image.url, class: "user-icon" %>
+                            <% else %>
+                                <%= image_tag("/images/icon/no-image.png") %>
+                            <% end %>
+                            <% if @user == current_user %>
+                                <%= link_to "プロフィール編集", @user.profile, class: "profile-edit-link" %>
+                            <% else %>
+                                <%= render "relationships/follow_button.html", user: @user %></>
+                            <% end %>
+                        </div>
+                        <div class="second-line">
+                            <p class="user-name"><%= @user.name %></p>
+                            <% if @user.followed?(current_user) %>
+                                <p>フォローされています</p>
+                            <% end %>
+                            <p class="user-about"><%= @user.profile.about %></p>
+                            <p><%= @user.profile.location %></p>
+                            <p><%= link_to "#{@user.relationships.count}　フォロー中", followed_path(@user) %>  　　　<%= link_to "#{@followers.count}　フォロワー", follower_path(@user) %></p>
+                        </div>
+                    </div>
+                </div>
+                <%= render @posts %>
+            </div>
+        </div>
+    </div>
+</div>
+<%= render 'posts/modal' %>

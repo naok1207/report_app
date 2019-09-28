@@ -1,9 +1,26 @@
-<%= form_for(@user.profile) do |f| %>
-    <%= f.label :location %>
-    <%= f.text_field :location %>
+<div class="form-signin">    
+    <h1 class="h3 mb-3 font-weight-normal">
+        <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">
+                プロフィール編集
+            </font>
+        </font>
+    </h1>
+    <%= form_for(@user.profile) do |f| %>
+        <% if @user.profile.image? %>
+            <%= image_tag @user.profile.image.url %>
+        <% else %>
+            <%= image_tag("/images/icon/no-image.png") %>
+        <% end %>
 
-    <%= f.label :about %>
-    <%= f.text_field :about %>
+        <%= f.label :location %>
+        <%= f.text_field :location, class: "form-control mb-3" %>
 
-    <%= f.submit "変更を反映" %>
-<% end %>
+        <%= f.label :about, class: "mb-3" %>
+        <%= f.text_field :about, class: "form-control mb-3" %>
+
+        <%= f.file_field :image %>
+
+        <%= f.submit "変更を反映", class: "btn btn-lg btn-primary btn-block mt-3" %>
+    <% end %>
+</div>
