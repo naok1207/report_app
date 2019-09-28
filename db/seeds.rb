@@ -10,7 +10,9 @@ user1 = User.create!(
     name: "hoge1",
     email: "hoge1@hoge.hoge",
     password:               "hogehoge",
-    password_confirmation:   "hogehoge"
+    password_confirmation:   "hogehoge",
+    activated: true,
+    activated_at: Time.zone.now
 )
 Profile.create!(
     user_id: user1.id,
@@ -35,7 +37,9 @@ locate = [
         name: "hoge#{i}",
         email: "hoge#{i}@hoge.hoge",
         password: "hogehoge",
-        password_confirmation: "hogehoge"
+        password_confirmation: "hogehoge",
+        activated: true,
+        activated_at: Time.zone.now
     )
     Profile.create!(
         user_id: user.id,

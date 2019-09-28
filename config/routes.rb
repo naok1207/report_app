@@ -18,4 +18,5 @@ Rails.application.routes.draw do
     resources :posts, only: [:show, :new, :create]
   end
   resources :relationships, only: [:create, :destroy]
+  resources :account_activations, only: [:edit]
 end
