@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def index
     @user = User.find(current_user.id)
-    @users = User.where(activated: true)
+    @users = User.all
     @post = Post.new
   end
 
