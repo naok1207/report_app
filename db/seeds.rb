@@ -12,7 +12,8 @@ user1 = User.create!(
     password:               "hogehoge",
     password_confirmation:   "hogehoge",
     activated: true,
-    activated_at: Time.zone.now
+    activated_at: Time.zone.now,
+    admin: true
 )
 Profile.create!(
     user_id: user1.id,

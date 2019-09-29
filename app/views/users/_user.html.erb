@@ -6,6 +6,11 @@
     <td>
         <p class="text-center"><%= Relationship.where(follow_id: user.id).count %></p>
     </td>
+    <td>
+        <% if current_user.admin? && !current_user?(user) %>
+            <p><%= link_to "delete", user, method: :delete, data: { confirm: "You sure?" } %></p>
+        <% end %>
+    </td>
 </tr>
 
 

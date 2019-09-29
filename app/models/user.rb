@@ -17,35 +17,43 @@ class User < ApplicationRecord
     has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id'
     has_many :followers, through: :reverse_of_relationships, source: :user
 
+    # 渡された文字列のハッシュ値を返す
     def self.digest(string)
-      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                    BCrypt::Engine.cost
       BCrypt::Password.create(string, cost: cost)
     end
 
-    def self.new_token
+    # ランダムなトークンを返す
+    def User.new_token
       SecureRandom.urlsafe_base64
     end
 
+    # 永続セッションのためにユーザーをデータベースに記憶する
     def remember
       self.remember_token = User.new_token
       update_attribute(:remember_digest, User.digest(remember_token))
     end
 
+    # ユーザーのログイン情報を破棄する
     def forget
-      update_attribute(:remember_digest, nil)
+        update_attribute(:remember_digest, nil)
     end
 
+    # トークンがダイジェストと一致したらtrueを返す
     def authenticated?(attribute, token)
       digest = send("#{attribute}_digest")
       return false if digest.nil?
       BCrypt::Password.new(digest).is_password?(token)
     end
 
+    # アカウントを有効にする
     def activate
       update_attribute(:activated, true)
       update_attribute(:activated_at, Time.zone.now)
     end
 
+    # 有効化用のメールを送信する
     def send_activation_email
       UserMailer.account_activation(self).deliver_now
     end
