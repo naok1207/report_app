@@ -5,7 +5,6 @@
     </button>
     <div class="collapse navbar-collapse  justify-content-end" id="navbarNavDropdown">
       <ul class="navbar-nav">
-        <% if @user == current_user %>
           <li class="nav-item">
             <%= link_to "ユーザ一覧", users_path, class: "nav-link" %>
           </li>
@@ -20,7 +19,6 @@
               <%= link_to "logout_path", logout_path, method: :delete, class: "dropdown-item" %>
             </div>
           </li>
-        <% end %>
       </ul>
     </div>
   </nav>

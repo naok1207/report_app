@@ -4,18 +4,21 @@ class User < ApplicationRecord
     before_save :downcase_email
     before_create :create_activation_digest
     validates :name,  presence: true, length: { maximum: 10 }
-    validates :email, presence: true
+    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+    validates :email, presence: true, length: { maximum: 255 },
+                      format: { with: VALID_EMAIL_REGEX },
+                      uniqueness: { case_sensitive: false }
     has_secure_password
     validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
-    has_one :profile
+    has_one :profile, dependent: :destroy
 
-    has_many :posts
+    has_many :posts, dependent: :destroy
 
-    has_many :relationships
-    has_many :followings, through: :relationships, source: :follow
-    has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id'
-    has_many :followers, through: :reverse_of_relationships, source: :user
+    has_many :relationships, dependent: :destroy
+    has_many :followings, through: :relationships, source: :follow, dependent: :destroy
+    has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id', dependent: :destroy
+    has_many :followers, through: :reverse_of_relationships, source: :user, dependent: :destroy
 
     # 渡された文字列のハッシュ値を返す
     def self.digest(string)
@@ -37,7 +40,7 @@ class User < ApplicationRecord
 
     # ユーザーのログイン情報を破棄する
     def forget
-        update_attribute(:remember_digest, nil)
+      update_attribute(:remember_digest, nil)
     end
 
     # トークンがダイジェストと一致したらtrueを返す
