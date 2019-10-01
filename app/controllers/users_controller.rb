@@ -28,6 +28,7 @@ class UsersController < ApplicationController
       flash[:info] = "Please check your email to activate your account."
       redirect_to login_path
     else
+      flash[:danger] = "email is used"
       render 'new'
     end
   end
