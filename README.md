@@ -1,24 +1,38 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## This is my first project
 
-Things you may want to cover:
+* Ruby on Rails の学習を始めてからの初めてのプロジェクト
+* UI周りは調整中でpcでのみ確認可能
+* 半ば無理やり作ってみたものですのでプログラムが汚いので修正中
 
-* Ruby version
+## 今回作成したものについて
 
-* System dependencies
+twitterを模した投稿型のSNS
 
-* Configuration
+    https://report-app-like-twitter.herokuapp.com
 
-* Database creation
+こちらのurlにて確認していただくことができます。
 
-* Database initialization
+## 機能面
 
-* How to run the test suite
+* ユーザー登録・ログイン・ログアウト機能
+* 投稿機能（コメントはできない）
+* プロフィール登録機能
+* フォロー機能（フォロー・フォロワーの一覧を見ることができる）
+* メールによる認証機能
 
-* Services (job queues, cache servers, search engines, etc.)
+## 今後の予定
 
-* Deployment instructions
+* 投稿に対するコメントいいねの機能を追加
+* 通知機能追加
+* タグづけ機能追加
 
-* ...
+## 補足
+
+メール機能を動作させるには環境変数を指定する必要があります(ローカル環境で試す場合)
+
+    $ export SMTP=<gmailアドレス>
+    $ export SMTP=<password>
+
+※gmailで設定されているためgmailしか利用できません。(送信側のみ)
