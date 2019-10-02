@@ -2,6 +2,8 @@
     <ul>
         <li><%= link_to "マイページ", current_user %></li>
         <li><%= link_to "home", user_post_path(id: current_user.id, user_id: current_user.id) %></li>
-        <a class="js-modal-open" href="">ツイート</a>
+        <% if @user == current_user %>
+            <a class="js-modal-open" href="">ツイート</a>
+        <% end %>
     </ul>
 </div>

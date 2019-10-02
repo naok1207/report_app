@@ -1,28 +1,28 @@
 class RelationshipsController < ApplicationController
   
-    def create
+    def create            # follow する
       user = User.find(params[:follow_id])
       following = current_user.follow(user)
-      if following.save
-        flash[:success] = 'ユーザーをフォローしました'
+      if following.save   # follow 成功
+        # flash[:success] = 'ユーザーをフォローしました'
         redirect_to user
-      else
-        flash.now[:alert] = 'ユーザーのフォローに失敗しました'
+      else                # follow 失敗
+        # flash.now[:alert] = 'ユーザーのフォローに失敗しました'
         redirect_to user
       end
     end
   
-    def destroy
+    def destroy           # unfollow する
       user = User.find(params[:follow_id])
       following = current_user.unfollow(user)
-      if following.destroy
+      if following.destroy  # unfollow 成功
         redirect_to user
-      else
+      else                  # unfollow 失敗
         redirect_to user
       end
     end
 
-    def followed
+    def followed          # follow 先の user一覧を取得
       @followed = Relationship.where(user_id: params[:id])
       id = []
       @followed.each do |followed|
@@ -31,7 +31,7 @@ class RelationshipsController < ApplicationController
       @users = User.find(id)
     end
 
-    def follower
+    def follower          # follower のユーザー一覧を取得
       @user = User.find(params[:id])
       @follower = Relationship.where(follow_id: @user.id)
       id = []
@@ -40,8 +40,4 @@ class RelationshipsController < ApplicationController
       end
       @users = User.find(id)
     end
-  
-    private
-  
-  
   end

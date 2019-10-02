@@ -1,6 +1,6 @@
 <div class="post-box">
     <div class="post-left">
-            <% if post.user.profile.image? %>
+        <% if post.user.profile.image? %>
             <%= image_tag post.user.profile.image.url, class: "user-icon" %>
         <% else %>
             <div class="user-icon"></div>

@@ -6,6 +6,7 @@
             </div>
         </div>
         <div class="col-8 wrapper">
+            <%= link_to '戻る', :back %> 
             <div class="user-content">
                 <div class="profile-box">
                     <div class="user-bg"></div>
@@ -14,12 +15,12 @@
                             <% if @user.profile.image? %>
                                 <%= image_tag @user.profile.image.url, class: "user-icon" %>
                             <% else %>
-                                <%= image_tag("/images/icon/no-image.png") %>
+                                <img src="../../assets/images/icon/no-image.jpg" class="user-icon" alt="">
                             <% end %>
                             <% if @user == current_user %>
                                 <%= link_to "プロフィール編集", @user.profile, class: "profile-edit-link" %>
                             <% else %>
-                                <%= render "relationships/follow_button.html", user: @user %></>
+                                <%= render "relationships/follow_button.html", user: @user %></a>
                             <% end %>
                         </div>
                         <div class="second-line">
@@ -38,4 +39,6 @@
         </div>
     </div>
 </div>
-<%= render 'posts/modal' %>
+<% if @user == current_user %>
+    <%= render 'posts/modal' %>
+<% end %>
